@@ -32,3 +32,12 @@ Route::post('products/store', 'ProductController@store')->name("product-store");
 Route::get('home', function () {
     return view('home');
 });
+
+//update form
+Route::post('products/update', 'ProductController@update')->name("product-update");
+
+//show form
+Route::get('products/show/{id}', 'ProductController@show')->name("product-show");
+
+//delete product 
+Route::get('products/delete/{id}', 'ProductController@delete')->name("product-delete");
