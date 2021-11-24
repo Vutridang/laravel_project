@@ -15,17 +15,29 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('Home.layout.app');
+    return view('welcome');
+});
+Route::get('store', 'ProductController@debug');
+
+Route::get('index', 'ProductController@index');
+
+Route::get('show/{id}', 'ProductController@show');
+
+
+//create form
+Route::get('products/create', 'ProductController@create');
+//create form submit
+Route::post('products/store', 'ProductController@store')->name("product-store");
+
+Route::get('home', function () {
+    return view('home');
 });
 
-Route::group(['middleware'=>'is_admin'],function(){
-    Route::get('admin', function () {
-    return view('Admin.index');
-})->name('dashboard');
+//update form
+Route::post('products/update', 'ProductController@update')->name("product-update");
 
-    Route::get('category', 'Admin\CategorysController@index')->name('auth.category');
-});
+//show form
+Route::get('products/show/{id}', 'ProductController@show')->name("product-show");
 
-Route::get('login', 'Admin\AuthController@index')->name('auth.login.get');
-Route::post('login', 'Admin\AuthController@postLogin')->name('auth.login.post');
-Route::get('logout', 'Admin\AuthController@logOut')->name('auth.logout.get');
+//delete product 
+Route::get('products/delete/{id}', 'ProductController@delete')->name("product-delete");
